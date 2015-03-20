@@ -67,6 +67,19 @@ if [ ! -f "${xmlfile}" ] ; then
     exit 3
 fi
 
+for requiredargument in \
+    eventIdentifierType \
+    eventIdentifierValue \
+    eventType \
+    eventDateTime ;
+do
+    if [ -z "${!requiredargument}" ] ; then
+        echo "${requiredargument} is set to \"${!requiredargument}\""
+        echo The mandatory arguments are not set.
+        exit 4
+    fi
+done
+
 xml ed -L -N P="info:lc/xmlns/premis-v2" \
 -a "(/P:premis/P:event|P:object)[last()]" -t elem -n "event" -v "" \
 -s "/P:premis/event[last()]" -t elem -n "eventIdentifier" -v "" \
