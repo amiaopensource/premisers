@@ -41,62 +41,26 @@ exit
 
 while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:h" opt; do
     case $opt in
-        i)
-            eventIdentifierType="$OPTARG"
-            ;;
-        I)
-            eventIdentifierValue="$OPTARG"
-            ;;
-        T)
-            eventType="$OPTARG"
-            ;;
-        d)
-            eventDateTime="$OPTARG"
+        i)  eventIdentifierType="$OPTARG" ;;
+        I)  eventIdentifierValue="$OPTARG" ;;
+        T)  eventType="$OPTARG" ;;
+        d)  eventDateTime="$OPTARG"
             if [ "$eventDateTime" = "now" ] ; then
                 eventDateTime=`date "+%Y-%m-%dT%H:%M:%S"`
-            fi
-            ;;
-        D)
-            eventDetail="$OPTARG"
-            ;;
-        E)
-            eventOutcome="$OPTARG"
-            ;;
-        N)
-            eventOutcomeDetailNote="$OPTARG"
-            ;;
-        l)
-            linkingAgentIdentifierType="$OPTARG"
-            ;;
-        L)
-            linkingAgentIdentifierValue="$OPTARG"
-            ;;
-        r)
-            linkingAgentRole="$OPTARG"
-            ;;
-        s)
-            sourceLinkingObjectIdentifierType="$OPTARG"
-            ;;
-        S)
-            sourceLinkingObjectIdentifierValue="$OPTARG"
-            ;;
-        o)
-            outcomeLinkingObjectIdentifierType="$OPTARG"
-            ;;
-        O)
-            outcomeLinkingObjectIdentifierValue="$OPTARG"
-            ;;
-        h)
-            usage
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG"
-            usage
-            ;;
-        :)
-            echo "Option -$OPTARG requires an argument."
-            usage
-            ;;
+            fi;;
+        D)  eventDetail="$OPTARG" ;;
+        E)  eventOutcome="$OPTARG" ;;
+        N)  eventOutcomeDetailNote="$OPTARG" ;;
+        l)  linkingAgentIdentifierType="$OPTARG" ;;
+        L)  linkingAgentIdentifierValue="$OPTARG" ;;
+        r)  linkingAgentRole="$OPTARG" ;;
+        s)  sourceLinkingObjectIdentifierType="$OPTARG" ;;
+        S)  sourceLinkingObjectIdentifierValue="$OPTARG" ;;
+        o)  outcomeLinkingObjectIdentifierType="$OPTARG" ;;
+        O)  outcomeLinkingObjectIdentifierValue="$OPTARG" ;;
+        h)  usage ;;
+        \?) echo "Invalid option: -$OPTARG" ; usage ;;
+        :)  echo "Option -$OPTARG requires an argument." ; usage ;;
     esac
 done
 shift $(( ${OPTIND} - 1 ))
