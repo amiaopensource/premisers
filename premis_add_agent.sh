@@ -12,11 +12,8 @@ for i in "${dependencies[@]}" ; do
     fi
 done
 
-while getopts ":x:i:I:n:T:N:l:L:" opt; do
+while getopts ":i:I:n:T:N:l:L:" opt; do
     case $opt in
-        x)
-            xmlfile="$OPTARG"
-            ;;
         i)
             agentIdentifierType="$OPTARG" >&2
             ;;
@@ -48,6 +45,16 @@ while getopts ":x:i:I:n:T:N:l:L:" opt; do
         ;;
     esac
 done
+shift $(( ${OPTIND} - 1 ))
+xmlfile="$1"
+if [ "${xmlfile#*.}" != "xml" ] ; then
+    echo "An xml input must be provided."
+    exit 2
+fi
+if [ ! -f "${xmlfile}" ] ; then
+    echo "${xmlfile} does not appear to be a file."
+    exit 3
+fi
 
 xml ed -L -N P="info:lc/xmlns/premis-v2" \
 -a "(/P:premis/P:agent|P:event)[last()]" -t elem -n "agent" -v "" \
