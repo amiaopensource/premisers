@@ -1,9 +1,6 @@
 #!/bin/bash
-while getopts ":x:i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
+while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
     case $opt in
-        x)
-            xmlfile="$OPTARG"
-            ;;
         i)
             eventIdentifierType="$OPTARG" >&2
             ;;
@@ -59,6 +56,16 @@ while getopts ":x:i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
             ;;
     esac
 done
+shift $(( ${OPTIND} - 1 ))
+xmlfile="$1"
+if [ "${xmlfile#*.}" != "xml" ] ; then
+    echo "An xml input must be provided."
+    exit 2
+fi
+if [ ! -f "${xmlfile}" ] ; then
+    echo "${xmlfile} does not appear to be a file."
+    exit 3
+fi
 
 xml ed -L -N P="info:lc/xmlns/premis-v2" \
 -a "(/P:premis/P:event|P:object)[last()]" -t elem -n "event" -v "" \
