@@ -1,6 +1,5 @@
 #!/bin/bash
 unset premisinsert
-while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
 version=0.1
 dependencies=(xml)
 
@@ -37,6 +36,7 @@ echo
 exit
 }
 
+while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:h" opt; do
     case $opt in
         i)
             eventIdentifierType="$OPTARG"
@@ -83,13 +83,16 @@ exit
         O)
             outcomeLinkingObjectIdentifierValue="$OPTARG"
             ;;
+        h)
+            usage
+            ;;
         \?)
             echo "Invalid option: -$OPTARG"
-            exit 1
+            usage
             ;;
         :)
             echo "Option -$OPTARG requires an argument."
-            exit 1
+            usage
             ;;
     esac
 done
