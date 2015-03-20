@@ -36,6 +36,16 @@ if [ ! -f "${xmlfile}" ] ; then
     exit 3
 fi
 
+for requiredargument in \
+    agentIdentifierType \
+    agentIdentifierValue ;
+do
+    if [ -z "${!requiredargument}" ] ; then
+        echo "${requiredargument} is set to \"${!requiredargument}\""
+        echo The mandatory arguments are not set.
+        exit 4
+    fi
+done
 if [ -n "${agentIdentifierType}" -o -n "${agentIdentifierValue}" ] ; then
     premisinsert+=(-s "/P:premis/agent[last()]" -t elem -n "agentIdentifier")
 fi
