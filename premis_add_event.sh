@@ -119,4 +119,63 @@ do
         exit 4
     fi
 done
+if [ -n "${eventIdentifierType}" -o -n "${eventIdentifierValue}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "eventIdentifier")
+fi
+if [ -n "${eventIdentifierType}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]/eventIdentifier[last()]" -t elem -n "eventIdentifierType" -v "$eventIdentifierType")
+fi
+if [ -n "${eventIdentifierValue}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]/eventIdentifier[last()]" -t elem -n "eventIdentifierValue" -v "$eventIdentifierValue")
+fi
+if [ -n "${eventType}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "eventType" -v "$eventType")
+fi
+if [ -n "${eventDateTime}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "eventDateTime" -v "$eventDateTime")
+fi
+if [ -n "${eventDetail}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "eventDetail" -v "$eventDetail")
+fi
+if [ -n "${eventOutcome}" -o -n "${eventOutcomeDetailNode}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "eventOutcomeInformation")
+fi
+if [ -n "${eventOutcome}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]/eventOutcomeInformation[last()]" -t elem -n "eventOutcome" -v "$eventOutcome")
+fi
+if [ -n "${eventOutcomeDetailNote}" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]/eventOutcomeInformation[last()]" -t elem -n "eventOutcomeDetail")
+    premisinsert+=(-s "/P:premis/event[last()]/eventOutcomeInformation[last()]/eventOutcomeDetail[last()]" -t elem -n "eventOutcomeDetailNote" -v "$eventOutcomeDetailNote")
+fi
+if [ -n "$linkingAgentIdentifierType" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "linkingAgentIdentifier")
+    premisinsert+=(-s "/P:premis/event[last()]/linkingAgentIdentifier[last()]" -t elem -n "linkingAgentIdentifierType" -v "$linkingAgentIdentifierType")
+fi
+if [ -n "$linkingAgentIdentifierValue" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]/linkingAgentIdentifier[last()]" -t elem -n "linkingAgentIdentifierValue" -v "$linkingAgentIdentifierValue")
+fi
+if [ -n "$linkingAgentRole" ] ; then
+    premisinsert+=(-s "/P:premis/event[last()]/linkingAgentIdentifier[last()]" -t elem -n "linkingAgentRole" -v "$linkingAgentRole")
+fi
+if [ -n "$sourceLinkingObjectIdentifierType" -a -n "$sourceLinkingObjectIdentifierType" ] ; then
+    if [ -n "$sourceLinkingObjectIdentifierType" ] ; then
+        premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "linkingObjectIdentifier")
+        premisinsert+=(-s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierType" -v "$sourceLinkingObjectIdentifierType")
+    fi
+    if [ -n "$sourceLinkingObjectIdentifierValue" ] ; then
+        premisinsert+=(-s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierValue" -v "$sourceLinkingObjectIdentifierValue")
+        premisinsert+=(-s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectRole" -v "source")
+    fi
+fi
+if [ -n "$outcomeLinkingObjectIdentifierType" -a -n "$sourceLinkingObjectIdentifierType" ] ; then
+    if [ -n "$outcomeLinkingObjectIdentifierType" ] ; then
+        premisinsert+=(-s "/P:premis/event[last()]" -t elem -n "linkingObjectIdentifier")
+        premisinsert+=(-s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierType" -v "$outcomeLinkingObjectIdentifierType")
+    fi
+    if [ -n "$outcomeLinkingObjectIdentifierValue" ] ; then
+        premisinsert+=(-s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierValue" -v "$outcomeLinkingObjectIdentifierValue")
+        premisinsert+=(-s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectRole" -v "outcome")
+    fi
+fi
 
+xml ed -L -N P="info:lc/xmlns/premis-v2" -a "(/P:premis/P:event|P:object)[last()]" -t elem -n "event" ${premisinsert[@]} "$xmlfile"
