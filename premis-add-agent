@@ -96,4 +96,4 @@ if [ -n "${linkingEventIdentifierValue}" ] ; then
     premisinsert+=(-s "/P:premis/agent[last()]/linkingEventIdentifier[last()]" -t elem -n "linkingEventIdentifierValue" -v "$linkingEventIdentifierValue")
 fi
 
-xml ed -L -N P="info:lc/xmlns/premis-v2" -a "(/P:premis/P:agent|P:event)[last()]" -t elem -n "agent" "${premisinsert[@]}" "$xmlfile"
+xml ed -L -N P="info:lc/xmlns/premis-v2" -a "(/P:premis/P:agent|/P:premis/P:event|/P:premis/P:object)[last()]" -t elem -n "agent" "${premisinsert[@]}" "$xmlfile"

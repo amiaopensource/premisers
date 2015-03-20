@@ -145,4 +145,4 @@ if [ -n "$outcomeLinkingObjectIdentifierType" -a -n "$sourceLinkingObjectIdentif
     fi
 fi
 
-xml ed -L -N P="info:lc/xmlns/premis-v2" -a "(/P:premis/P:event|P:object)[last()]" -t elem -n "event" "${premisinsert[@]}" "$xmlfile"
+xml ed -L -N P="info:lc/xmlns/premis-v2" -a "(/P:premis/P:event|/P:premis/P:object)[last()]" -t elem -n "event" "${premisinsert[@]}" "$xmlfile"
