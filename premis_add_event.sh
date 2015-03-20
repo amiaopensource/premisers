@@ -1,4 +1,5 @@
 #!/bin/bash
+unset premisinsert
 while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
     case $opt in
         i)
@@ -80,28 +81,3 @@ do
     fi
 done
 
-xml ed -L -N P="info:lc/xmlns/premis-v2" \
--a "(/P:premis/P:event|P:object)[last()]" -t elem -n "event" -v "" \
--s "/P:premis/event[last()]" -t elem -n "eventIdentifier" -v "" \
--s "/P:premis/event[last()]/eventIdentifier[last()]" -t elem -n "eventIdentifierType" -v "$eventIdentifierType" \
--s "/P:premis/event[last()]/eventIdentifier[last()]" -t elem -n "eventIdentifierValue" -v "$eventIdentifierValue" \
--s "/P:premis/event[last()]" -t elem -n "eventType" -v "$eventType" \
--s "/P:premis/event[last()]" -t elem -n "eventDateTime" -v "$eventDateTime" \
--s "/P:premis/event[last()]" -t elem -n "eventDetail" -v "$eventDetail" \
--s "/P:premis/event[last()]" -t elem -n "eventOutcomeInformation" -v "" \
--s "/P:premis/event[last()]/eventOutcomeInformation[last()]" -t elem -n "eventOutcome" -v "$eventOutcome" \
--s "/P:premis/event[last()]/eventOutcomeInformation[last()]" -t elem -n "eventOutcomeDetail" -v "" \
--s "/P:premis/event[last()]/eventOutcomeInformation[last()]/eventOutcomeDetail[last()]" -t elem -n "eventOutcomeDetailNote" -v "$eventOutcomeDetailNote" \
--s "/P:premis/event[last()]" -t elem -n "linkingAgentIdentifier" -v "" \
--s "/P:premis/event[last()]/linkingAgentIdentifier[last()]" -t elem -n "linkingAgentIdentifierType" -v "$linkingAgentIdentifierType" \
--s "/P:premis/event[last()]/linkingAgentIdentifier[last()]" -t elem -n "linkingAgentIdentifierValue" -v "$linkingAgentIdentifierValue" \
--s "/P:premis/event[last()]/linkingAgentIdentifier[last()]" -t elem -n "linkingAgentRole" -v "$linkingAgentRole" \
--s "/P:premis/event[last()]" -t elem -n "linkingObjectIdentifier" -v "" \
--s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierType" -v "$sourceLinkingObjectIdentifierType" \
--s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierValue" -v "$sourceLinkingObjectIdentifierValue" \
--s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectRole" -v "source" \
--s "/P:premis/event[last()]" -t elem -n "linkingObjectIdentifier" -v "" \
--s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierType" -v "$outcomeLinkingObjectIdentifierType" \
--s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectIdentifierValue" -v "$outcomeLinkingObjectIdentifierValue" \
--s "/P:premis/event[last()]/linkingObjectIdentifier[last()]" -t elem -n "linkingObjectRole" -v "outcome" \
-"$xmlfile"
