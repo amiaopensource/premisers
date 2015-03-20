@@ -1,6 +1,17 @@
 #!/bin/bash
 unset premisinsert
 while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
+dependencies=(xml)
+
+# check_dependencies(){
+for i in "${dependencies[@]}" ; do
+    if [ ! $(which "$i") ] ; then
+        echo This script requires "${i}."
+        echo hi "$i"
+        exit 1
+    fi
+done
+
     case $opt in
         i)
             eventIdentifierType="$OPTARG"
