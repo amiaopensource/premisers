@@ -13,6 +13,30 @@ for i in "${dependencies[@]}" ; do
     fi
 done
 
+usage(){
+echo
+echo "$(basename ${0}) ${version}"
+echo "This script will add an event to an existing PREMIS XML. It is tested with PREMIS version 2.0."
+echo "Dependencies: ${dependencies[@]}"
+echo "Usage: $(basename $0) -i eventIDType -I eventIDValue -T eventType -d datetime [ other options ] premis.xml"
+echo " -i ( eventIdentifierType )"
+echo " -I ( eventIdentifierValue )"
+echo " -T ( eventType )"
+echo " -d ( eventDateTime [ enter now to express the run time system timestamp ] )"
+echo " -D ( eventDetail )"
+echo " -E ( eventOutcome )"
+echo " -N ( eventOutcomeDetailNote )"
+echo " -l ( linkingAgentIdentifierType )"
+echo " -L ( linkingAgentIdentifierValue )"
+echo " -s ( sourceLinkingObjectIdentifierType )"
+echo " -S ( sourceLinkingObjectIdentifierValue )"
+echo " -o ( outcomeLinkingObjectIdentifierType )"
+echo " -O ( outcomeLinkingObjectIdentifierValue )"
+echo " -h ( display this help )"
+echo
+exit
+}
+
     case $opt in
         i)
             eventIdentifierType="$OPTARG"
