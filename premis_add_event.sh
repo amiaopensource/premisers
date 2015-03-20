@@ -32,6 +32,9 @@ echo " -S ( sourceLinkingObjectIdentifierValue )"
 echo " -o ( outcomeLinkingObjectIdentifierType )"
 echo " -O ( outcomeLinkingObjectIdentifierValue )"
 echo " -h ( display this help )"
+echo ""
+echo "Examples:"
+echo "$(basename $0) -i "Local Event Identification Sytem" -I u812 -T contemplation -d now premis.xml"
 echo
 exit
 }
