@@ -1,39 +1,39 @@
 #!/bin/bash
 while getopts ":x:i:I:n:T:N:l:L:" opt; do
-	case $opt in
-		x)
-			xmlfile="$OPTARG"
-			;;
-		i)
-			agentIdentifierType="$OPTARG" >&2
-			;;
-		I)
-			agentIdentifierValue="$OPTARG" >&2
-			;;
-		n)
-			agentName="$OPTARG" >&2
-			;;
-		T)
-			agentType="$OPTARG" >&2
-			;;
-		N)
-			agentNote="$OPTARG" >&2
-			;;
-		l)
-			linkingEventIdentifierType="$OPTARG" >&2
-			;;
-		L)
-			linkingEventIdentifierValue="$OPTARG" >&2
-			;;
-		\?)
-			echo "Invalid option: -$OPTARG" >&2
-			exit 1
-		;;
-			:)
-			echo "Option -$OPTARG requires an argument." >&2
-			exit 1
-		;;
-	esac
+    case $opt in
+        x)
+            xmlfile="$OPTARG"
+            ;;
+        i)
+            agentIdentifierType="$OPTARG" >&2
+            ;;
+        I)
+            agentIdentifierValue="$OPTARG" >&2
+            ;;
+        n)
+            agentName="$OPTARG" >&2
+            ;;
+        T)
+            agentType="$OPTARG" >&2
+            ;;
+        N)
+            agentNote="$OPTARG" >&2
+            ;;
+        l)
+            linkingEventIdentifierType="$OPTARG" >&2
+            ;;
+        L)
+            linkingEventIdentifierValue="$OPTARG" >&2
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+        ;;
+            :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+        ;;
+    esac
 done
 
 xml ed -L -N P="info:lc/xmlns/premis-v2" \

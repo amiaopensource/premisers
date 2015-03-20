@@ -7,14 +7,14 @@
 [ ! `which xml` ] && { echo Missing xmlstarlet utility ; exit 1 ;};
 
 if [ `which uuid` ] ; then
-	makeuuid="uuid -v 4"
+    makeuuid="uuid -v 4"
 elif [ `which uuidgen` ] ; then
-	makeuuid="uuidgen"
+    makeuuid="uuidgen"
 elif [ `which python` ] ; then
-	makeuuid="python -c 'import uuid; print uuid.uuid1()'"
+    makeuuid="python -c 'import uuid; print uuid.uuid1()'"
 else
-	echo Missing a uuid generator
-	exit 1
+    echo Missing a uuid generator
+    exit 1
 fi
 
 script_dir=`dirname "$0"`
@@ -34,10 +34,10 @@ cd "$package_path"
 mediainfo -f --language=raw --output=XML "./objects" > "./metadata/mediainfo.xml"
 EC=`echo "$?"`
 if [ "$EC" -ne "0" ] ; then
-	eventOutcome="failure"
-	#quarantine?
+    eventOutcome="failure"
+    #quarantine?
 else
-	eventOutcome="success"
+    eventOutcome="success"
 fi
 cd "$startdir"
 xsltproc --stringparam representation_objectIdentifierValue "${package_name}" "${script_dir}/mediainfo2premis.xsl" "$package_path/metadata/mediainfo.xml" > "$package_path/metadata/premis.xml"
