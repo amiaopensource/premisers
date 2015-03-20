@@ -2,56 +2,56 @@
 while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
     case $opt in
         i)
-            eventIdentifierType="$OPTARG" >&2
+            eventIdentifierType="$OPTARG"
             ;;
         I)
-            eventIdentifierValue="$OPTARG" >&2
+            eventIdentifierValue="$OPTARG"
             ;;
         T)
-            eventType="$OPTARG" >&2
+            eventType="$OPTARG"
             ;;
         d)
-            eventDateTime="$OPTARG" >&2
+            eventDateTime="$OPTARG"
             if [ "$eventDateTime" = "now" ] ; then
                 eventDateTime=`date "+%Y-%m-%dT%H:%M:%S"`
             fi
             ;;
         D)
-            eventDetail="$OPTARG" >&2
+            eventDetail="$OPTARG"
             ;;
         E)
-            eventOutcome="$OPTARG" >&2
+            eventOutcome="$OPTARG"
             ;;
         N)
-            eventOutcomeDetailNote="$OPTARG" >&2
+            eventOutcomeDetailNote="$OPTARG"
             ;;
         l)
-            linkingAgentIdentifierType="$OPTARG" >&2
+            linkingAgentIdentifierType="$OPTARG"
             ;;
         L)
-            linkingAgentIdentifierValue="$OPTARG" >&2
+            linkingAgentIdentifierValue="$OPTARG"
             ;;
         r)
-            linkingAgentRole="$OPTARG" >&2
+            linkingAgentRole="$OPTARG"
             ;;
         s)
-            sourceLinkingObjectIdentifierType="$OPTARG" >&2
+            sourceLinkingObjectIdentifierType="$OPTARG"
             ;;
         S)
-            sourceLinkingObjectIdentifierValue="$OPTARG" >&2
+            sourceLinkingObjectIdentifierValue="$OPTARG"
             ;;
         o)
-            outcomeLinkingObjectIdentifierType="$OPTARG" >&2
+            outcomeLinkingObjectIdentifierType="$OPTARG"
             ;;
         O)
-            outcomeLinkingObjectIdentifierValue="$OPTARG" >&2
+            outcomeLinkingObjectIdentifierValue="$OPTARG"
             ;;
         \?)
-            echo "Invalid option: -$OPTARG" >&2
+            echo "Invalid option: -$OPTARG"
             exit 1
             ;;
         :)
-            echo "Option -$OPTARG requires an argument." >&2
+            echo "Option -$OPTARG requires an argument."
             exit 1
             ;;
     esac
