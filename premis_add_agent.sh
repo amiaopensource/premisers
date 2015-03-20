@@ -14,35 +14,15 @@ done
 
 while getopts ":i:I:n:T:N:l:L:" opt; do
     case $opt in
-        i)
-            agentIdentifierType="$OPTARG" >&2
-            ;;
-        I)
-            agentIdentifierValue="$OPTARG" >&2
-            ;;
-        n)
-            agentName="$OPTARG" >&2
-            ;;
-        T)
-            agentType="$OPTARG" >&2
-            ;;
-        N)
-            agentNote="$OPTARG" >&2
-            ;;
-        l)
-            linkingEventIdentifierType="$OPTARG" >&2
-            ;;
-        L)
-            linkingEventIdentifierValue="$OPTARG" >&2
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            exit 1
-        ;;
-            :)
-            echo "Option -$OPTARG requires an argument." >&2
-            exit 1
-        ;;
+        i)  agentIdentifierType="$OPTARG" ;;
+        I)  agentIdentifierValue="$OPTARG" >&2 ;;
+        n)  agentName="$OPTARG" ;;
+        T)  agentType="$OPTARG" ;;
+        N)  agentNote="$OPTARG" ;;
+        l)  linkingEventIdentifierType="$OPTARG" ;;
+        L)  linkingEventIdentifierValue="$OPTARG" ;;
+        \?) echo "Invalid option: -$OPTARG" ; exit 1 ;;
+        :)  echo "Option -$OPTARG requires an argument." ; exit 1 ;;
     esac
 done
 shift $(( ${OPTIND} - 1 ))
