@@ -1,6 +1,7 @@
 #!/bin/bash
 unset premisinsert
 while getopts ":i:I:T:d:D:E:N:l:L:r:s:S:o:O:" opt; do
+version=0.1
 dependencies=(xml)
 
 # check_dependencies(){
