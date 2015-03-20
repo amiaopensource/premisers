@@ -1,4 +1,17 @@
 #!/bin/bash
+unset premisinsert
+version=0.1
+dependencies=(xml)
+
+# check_dependencies(){
+for i in "${dependencies[@]}" ; do
+    if [ ! $(which "$i") ] ; then
+        echo This script requires "${i}."
+        echo hi "$i"
+        exit 1
+    fi
+done
+
 while getopts ":x:i:I:n:T:N:l:L:" opt; do
     case $opt in
         x)
