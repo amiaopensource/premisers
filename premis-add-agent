@@ -12,7 +12,28 @@ for i in "${dependencies[@]}" ; do
     fi
 done
 
-while getopts ":i:I:n:T:N:l:L:" opt; do
+usage(){
+echo
+echo "$(basename ${0}) ${version}"
+echo "This script will add an agent to an existing PREMIS XML. It is tested with PREMIS version 2.0."
+echo "Dependencies: ${dependencies[@]}"
+echo "Usage: $(basename $0) -i agentIDType -I agentIDValue [ other options ] premis.xml"
+echo " -i ( agentIdentifierType )"
+echo " -I ( agentIdentifierValue )"
+echo " -n ( agentName )"
+echo " -T ( agentType )"
+echo " -N ( agentNote )"
+echo " -l ( linkingEventIdentifierType )"
+echo " -L ( linkingEventIdentifierValue )"
+echo " -h ( display this help )"
+echo ""
+echo "Examples:"
+echo "$(basename $0) -i "Local Agent Identification Sytem" -I "Agent 86" -T helper premis.xml"
+echo
+exit
+}
+
+while getopts ":i:I:n:T:N:l:L:h" opt; do
     case $opt in
         i)  agentIdentifierType="$OPTARG" ;;
         I)  agentIdentifierValue="$OPTARG" >&2 ;;
@@ -21,8 +42,9 @@ while getopts ":i:I:n:T:N:l:L:" opt; do
         N)  agentNote="$OPTARG" ;;
         l)  linkingEventIdentifierType="$OPTARG" ;;
         L)  linkingEventIdentifierValue="$OPTARG" ;;
-        \?) echo "Invalid option: -$OPTARG" ; exit 1 ;;
-        :)  echo "Option -$OPTARG requires an argument." ; exit 1 ;;
+        h)  usage ;;
+        \?) echo "Invalid option: -$OPTARG" ; usage ;;
+        :)  echo "Option -$OPTARG requires an argument." ; usage ;;
     esac
 done
 shift $(( ${OPTIND} - 1 ))
